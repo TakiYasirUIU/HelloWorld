@@ -1,5 +1,6 @@
 import React from 'react';
 import { View,TextInput,Button,StyleSheet } from 'react-native';
+import myImage from '../../assets/images/test.jpg';
 
 const InputPlace = props => {
     const {inputView} = styles;
@@ -18,7 +19,11 @@ const InputPlace = props => {
                     title="Add"
                     onPress={() => {
                         if (props.inputValue !== "") {
-                            props.setPlaceList([...props.placeList, { key: Math.random().toString(), value: props.inputValue }])
+                            props.setPlaceList([...props.placeList, { 
+                                key: Math.random().toString(), value: props.inputValue, image:{
+                                    uri:"https://static.youthop.com/uploads/sites/2/2018/06/uiu-768x601.jpg"
+                                }
+                            }])
                         }
                     }} />
 
