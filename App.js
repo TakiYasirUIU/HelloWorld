@@ -1,48 +1,53 @@
-import React,{useState} from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,TextInput,Button,FlatList } from 'react-native';
-import InputPlace from './components/InputPlace/InputPlace';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import PlaceList from './components/PlaceList/PlaceList';
+import InputPlace from './components/InputPlace/InputPlace';
 import PlaceDetail from './components/PlaceDetail/PlaceDetail';
 
-
-
 export default function App() {
-  const {container} = styles;
   const [inputValue, setInputValue] = useState("");
   const [placeList, setPlaceList] = useState([]);
-  const [selectedPlace, setSelectedPlace] = useState(null)
+  const [selectedPlace, setSelectedPlace] = useState(null);
+
   const handleSelectedPlace = key => {
-    const place = placeList.find(place =>{
+    const place = placeList.find(place => {
       return place.key === key;
     })
     setSelectedPlace(place);
   }
+
+  const handleHideModal = () => {
+    setSelectedPlace(null);
+  }
+
+  const handleDeleteItem = key => {
+    setPlaceList(
+      placeList.filter(place =>
+        place.key !== key)
+    );
+    setSelectedPlace(null);
+  }
+
   let placeDetail = null;
-  if(selectedPlace!==null){
-    placeDetail = <PlaceDetail place={selectedPlace}/>
+  if (selectedPlace !== null) {
+    placeDetail = <PlaceDetail
+      place={selectedPlace}
+      handleHideModal={handleHideModal}
+      handleDeleteItem={handleDeleteItem} />
   }
   return (
-    <View style={container}>
-      {/* <PlaceDetail></PlaceDetail> */}
+    <View style={styles.container}>
       {placeDetail}
       <InputPlace
-      inputValue={inputValue}
-      setInputValue={setInputValue}
-      placeList={placeList}
-      setPlaceList={setPlaceList}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        placeList={placeList}
+        setPlaceList={setPlaceList}
       />
-      <PlaceList placeList={placeList} handleSelectedPlace={handleSelectedPlace}/>
-      
-        
-     
-      
-      </View>
-    
+      <PlaceList placeList={placeList} handleSelectedPlace={handleSelectedPlace} />
+    </View>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -50,7 +55,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    flexDirection:'column',
-  },
-
+    flexDirection: 'column'
+  }
 });
