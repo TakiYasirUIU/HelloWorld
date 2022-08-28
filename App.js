@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import PlaceList from './components/PlaceList/PlaceList';
-import InputPlace from './components/InputPlace/InputPlace';
-import PlaceDetail from './components/PlaceDetail/PlaceDetail';
+import PlaceList from './src/components/PlaceList/PlaceList';
+import InputPlace from './src/components/InputPlace/InputPlace';
+import PlaceDetail from './src/components/PlaceDetail/PlaceDetail';
 
 export default function App() {
   const [inputValue, setInputValue] = useState("");
