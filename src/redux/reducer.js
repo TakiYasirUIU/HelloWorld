@@ -16,6 +16,11 @@ export const rootReducer = (state = initState, action) => {
                 ...state,
                 placeList: state.placeList.filter(place => place.key !== action.payload)
             }
+        case actionTypes.DELETE_PLACE:
+            return {
+                ...state,
+                placeList: state.placeList.filter(place=> place.key !== payload.key)
+            }
         default:
             return state;
     }
